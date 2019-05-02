@@ -29,9 +29,9 @@ namespace Magnetizer.Controllers
 
         // GET: api/Products/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        public async Task<ActionResult<Product>> GetProduct(string id)
         {
-            var product = await _context.Product.FindAsync(id);
+            var product = _context.Product.Where(itm => itm.Guid == id).FirstOrDefault();
 
             if (product == null)
             {
