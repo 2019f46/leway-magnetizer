@@ -24,7 +24,18 @@ namespace Magnetizer.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProduct()
         {
-            return await _context.Product.ToListAsync();
+            return await _context.Product.Include(i => i.Location).ToListAsync();
+        }
+
+        // GET api/Products/Magnetic
+        [HttpGet]
+        [Route("/magnetonly")]
+        public async Task<ActionResult<IEnumerable<Product>>> GetMagneticProducts()
+        {
+            var products = from item in _context.Product
+                       where item.IsMagnetized
+                       select item;
+            return await products.Include(i => i.Location).ToListAsync();
         }
 
         // GET: api/Products/5

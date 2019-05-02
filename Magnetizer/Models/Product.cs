@@ -11,5 +11,7 @@ namespace Magnetizer.Models
         public string Guid { get; set; }
         public string Name { get; set; }
         public bool IsMagnetized { get; set; }
+        public virtual Location Location{get; set; }
+        public int Weight { get; set; }
     }
 }
