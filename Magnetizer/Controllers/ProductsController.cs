@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Magnetizer.Models;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Magnetizer.Controllers
 {
@@ -21,6 +22,7 @@ namespace Magnetizer.Controllers
         }
 
         // GET: api/Products
+        [SwaggerOperation(Summary = "", Description = "Gets all products in the database")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProduct()
         {
@@ -28,6 +30,7 @@ namespace Magnetizer.Controllers
         }
 
         // GET api/Products/Magnetic
+        [SwaggerOperation(Summary = "", Description = "Get all products in the database which are set to magnetized true")]
         [HttpGet]
         [Route("/magnetonly")]
         public async Task<ActionResult<IEnumerable<Product>>> GetMagneticProducts()
@@ -39,6 +42,7 @@ namespace Magnetizer.Controllers
         }
 
         // GET: api/Products/5
+        [SwaggerOperation(Summary = "", Description = "Get the product with the matching GUID")]
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(string id)
         {
@@ -53,6 +57,7 @@ namespace Magnetizer.Controllers
         }
 
         // PUT: api/Products/5
+        [SwaggerOperation(Summary = "", Description = "Update a specific product")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProduct(int id, Product product)
         {
@@ -83,6 +88,7 @@ namespace Magnetizer.Controllers
         }
 
         // POST: api/Products
+        [SwaggerOperation(Summary = "", Description = "Add new product to the database")]
         [HttpPost]
         public async Task<ActionResult<Product>> PostProduct(Product product)
         {
@@ -93,6 +99,7 @@ namespace Magnetizer.Controllers
         }
 
         // DELETE: api/Products/5
+        [SwaggerOperation(Summary = "", Description = "Delete a product with the specific Id")]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Product>> DeleteProduct(int id)
         {

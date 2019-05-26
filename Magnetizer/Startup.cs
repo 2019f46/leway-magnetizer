@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using Magnetizer.Models;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Magnetizer
 {
@@ -41,6 +42,18 @@ namespace Magnetizer
                 options.Filters.Add(new CorsAuthorizationFilterFactory("AllowAnyOrigin"));
             });
 
+            // In ConfigureServices
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Title = "Example API",
+                    Version = "v1"
+                });
+                c.EnableAnnotations();
+
+            });
+
             services.AddDbContext<MagnetizerContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MagnetizerContext")));
         }
@@ -60,6 +73,11 @@ namespace Magnetizer
 
             app.UseHttpsRedirection();
             app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Example API v1");
+            });
         }
     }
 }
