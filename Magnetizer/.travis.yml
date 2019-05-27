@@ -1,0 +1,9 @@
+﻿language: csharp
+dist: trusty
+sudo: required
+mono: none
+dotnet: 2.2.0
+
+script:
+- dotnet restore TimeanatorBackend.sln
+- dotnet build TimeanatorBackend.sln
